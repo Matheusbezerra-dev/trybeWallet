@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { string } from 'prop-types';
 import { currencyAction, addExpenses, inEdit, handleEditor } from '../redux/actions';
-import fetchCurrency from '../api/Api';
 
-class WalletForm extends Component {
+class EditForm extends Component {
   state = {
     value: '',
     description: '',
     currency: 'USD',
     method: 'Dinheiro',
     tag: 'Alimentação',
-    exchangeRates: {},
   };
 
   componentDidMount() {
@@ -27,19 +25,8 @@ class WalletForm extends Component {
 
   handleClick = async (e) => {
     e.preventDefault();
-    const { handleAddExpenses } = this.props;
-    this.setState({
-      exchangeRates: await fetchCurrency(),
-    });
-    handleAddExpenses(this.state);
-    this.setState({
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      exchangeRates: {},
-    });
+    const { edit } = this.props;
+    edit(this.state);
   };
 
   render() {
@@ -122,10 +109,10 @@ class WalletForm extends Component {
         </label>
         <button
           type="button"
-          data-testid="button-walletForm"
+          data-testid="button-handleEdit"
           onClick={ this.handleClick }
         >
-          Adicionar despesa
+          Editar Despesas
         </button>
       </form>
     );
@@ -139,12 +126,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleCurrencyAction: (param) => dispatch(currencyAction(param)),
   handleAddExpenses: (param) => dispatch(addExpenses(param)),
-  changeEdit: (param) => dispatch(inEdit(param)),
-  changeEditor: (id) => dispatch(handleEditor(id)),
+  edit: (param) => dispatch(inEdit(param)),
+  handleEditor: (id) => dispatch(handleEditor(id)),
 });
 
-WalletForm.propTypes = {
+EditForm.propTypes = {
   currencies: string,
 }.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);
