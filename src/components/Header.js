@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { string, array } from 'prop-types';
+import logo from '../images/logoTrybeWallet.png';
+import {
+  DivContainerHeader,
+  ImgLogoWallet,
+  ContainerHeader,
+} from '../style/style';
 
 class Header extends Component {
   render() {
@@ -11,12 +17,18 @@ class Header extends Component {
       return acc + (value * ask);
     }, 0);
     return (
-      <div>
-        <h2>Trybe Wallet</h2>
-        <p data-testid="email-field">{`${email || 'Usuario()'}`}</p>
-        <p data-testid="total-field">{ totalExpenses.toFixed(2) || 0 }</p>
-        <p data-testid="header-currency-field">BRL</p>
-      </div>
+      <ContainerHeader>
+        <DivContainerHeader>
+          <ImgLogoWallet src={ logo } alt="logo TrybeWallet" />
+          <div>
+            Total de despesas
+            <p data-testid="total-field">{ totalExpenses.toFixed(2) || 0 }</p>
+            <p data-testid="header-currency-field">BRL</p>
+          </div>
+          <p data-testid="email-field">{`${email || 'Usuario()'}`}</p>
+
+        </DivContainerHeader>
+      </ContainerHeader>
     );
   }
 }

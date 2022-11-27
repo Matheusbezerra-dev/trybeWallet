@@ -5,17 +5,18 @@ import Header from '../components/Header';
 import Table from '../components/Table';
 import WalletForm from '../components/WalletForm';
 import EditForm from '../components/EditForm';
+import { DivHeader } from '../style/style';
 
 class Wallet extends Component {
   render() {
     const { edit } = this.props;
     return (
       <>
-        <header>
+        <DivHeader>
           <Header />
-        </header>
-        <main>
           {edit ? <EditForm /> : <WalletForm />}
+        </DivHeader>
+        <main>
           <Table />
         </main>
       </>
