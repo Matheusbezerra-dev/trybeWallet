@@ -2,6 +2,8 @@ import React from 'react';
 import { func } from 'prop-types';
 import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions';
+import { ContainerLogin, ImgLogo } from '../style/style';
+import logo from '../images/logoTrybeWallet.png';
 
 class Login extends React.Component {
   state = {
@@ -27,38 +29,40 @@ class Login extends React.Component {
     const valid = validEmail && validPassword;
 
     return (
-      <div>
-        <h2>TrybeWallet</h2>
+      <ContainerLogin>
+        <ImgLogo src={ logo } alt="logo TrybeWallet" />
         <form>
-          <input
-            type="text"
-            data-testid="email-input"
-            value={ email }
-            onChange={ this.handleChange }
-            name="email"
-            placeholder="Digite o seu email..."
-          />
-          <input
-            type="password"
-            data-testid="password-input"
-            onChange={ this.handleChange }
-            value={ password }
-            name="password"
-            placeholder="Digite o sua senha..."
-          />
-          <button
-            type="button"
-            disabled={ !valid }
-            data-testid="login-button"
-            onClick={ () => {
-              history.push('/carteira');
-              user(this.state);
-            } }
-          >
-            Entrar
-          </button>
+          <div>
+            <input
+              type="text"
+              data-testid="email-input"
+              value={ email }
+              onChange={ this.handleChange }
+              name="email"
+              placeholder="Digite o seu email..."
+            />
+            <input
+              type="password"
+              data-testid="password-input"
+              onChange={ this.handleChange }
+              value={ password }
+              name="password"
+              placeholder="Digite o sua senha..."
+            />
+            <button
+              type="button"
+              disabled={ !valid }
+              data-testid="login-button"
+              onClick={ () => {
+                history.push('/carteira');
+                user(this.state);
+              } }
+            >
+              Entrar
+            </button>
+          </div>
         </form>
-      </div>
+      </ContainerLogin>
     );
   }
 }
